@@ -17,7 +17,6 @@ class User(db.Model):
         return {
             "id": self.id,
             "email": self.email,
-            # completar
         }
 
 
@@ -68,7 +67,12 @@ class People(db.Model):
         return {
             "id": self.id,
             "name": self.name,
-            # completar
+            "gender": self.gender,
+            "height": self.height,
+            "weight": self.weight,
+            "hair_color": self.hair_color,
+            "skin_color": self.skin_color,
+            "eye_color": self.eye_color
         }
 
 
@@ -78,18 +82,18 @@ class Favorite(db.Model):
     planet_id = db.Column(db.Integer, db.ForeignKey('planets.id'))
     character_id = db.Column(db.Integer, db.ForeignKey('people.id'))
 
-
-    user = db.relationship("User", back_populates="favorites")
-    planet = db.relationship("Planets")
-    character = db.relationship("People")
-
+    user = db.relationship("User", back_populates="favorites")  
+    planet = db.relationship("Planets")  
+    character = db.relationship("People")  
 
     def __repr__(self):
-        return 'Nilson'
+        return '<Favorite %r>' % self.id
 
     def serialize(self):
         return {
-            "id": self.id
-            # completar
-
+            "id": self.id,
+            "user_id": self.user_id,
+            "planet": self.planet,
+            "character": self.character
+           
         }
